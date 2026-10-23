@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Salita ng Buhay | Bible Search</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status"></div>
+  <section id="authScreen" class="auth-layout">
+    <div class="auth-art">
+      <div class="brand brand-light"><span class="brand-mark">✝</span> Salita ng Buhay</div>
+      <div class="art-main">
+        <span class="eyebrow">WORD · WISDOM · FAITH</span>
+        <h1>Let the Word<br>light your way.</h1>
+        <p>Search Scripture, save meaningful verses, and continue your reading journey anytime.</p>
+        <blockquote>“Your word is a lamp to my feet, and a light for my path.”<small>PSALM 119:105 · WEB</small></blockquote>
+      </div>
+      <small class="art-foot">A quiet space for daily reflection.</small>
+    </div>
+    <div class="auth-side">
+      <div class="mobile-brand"><span class="brand-mark">✝</span> Salita ng Buhay</div>
+      <div class="auth-box">
+        <span id="authEyebrow" class="eyebrow green">WELCOME BACK</span>
+        <h2 id="authTitle">Sign in to your account</h2>
+        <p id="authDesc" class="muted">Your saved verses and reading history are waiting.</p>
+        <form id="authForm">
+          <label>Email address<input type="email" id="authEmail" required autocomplete="email" placeholder="you@example.com"></label>
+          <label>Password<input type="password" id="authPassword" required minlength="8" autocomplete="current-password" placeholder="At least 8 characters"></label>
+          <button id="authSubmit" class="btn primary full" type="submit">Sign in</button>
+          <p id="authError" class="form-error"></p>
+        </form>
+        <p class="auth-toggle"><span id="authToggleText">New here?</span> <button id="authToggle" type="button">Create an account</button></p>
+        <p class="tiny">Your password is securely hashed by PHP before it is stored. Never share your password.</p>
+      </div>
+    </div>
+  </section>
+
+  <div id="appScreen" class="app hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="brand"><span class="brand-mark">✝</span> Salita ng Buhay <button id="closeNav" class="icon-button mobile-only" aria-label="Close menu">×</button></div>
+      <div class="nav-label">LIBRARY</div>
+      <nav>
+        <button class="nav-item active" data-tab="read">▤ <span>Bible search</span></button>
+        <button class="nav-item" data-tab="favorites">♡ <span>Saved verses</span><b id="favoriteCount">0</b></button>
+        <button class="nav-item" data-tab="history">◷ <span>Search history</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="account"><div id="userInitial" class="avatar">U</div><div class="account-text"><b>My account</b><span id="userEmail"></span></div></div>
+        <button id="logoutButton" class="nav-item logout">↪ <span>Sign out</span></button>
+        <div class="sidebar-verse">✧<p>“Be still, and know that I am God.”</p><small>PSALM 46:10</small></div>
+      </div>
+    </aside>
+    <button id="navScrim" class="scrim hidden" aria-label="Close navigation"></button>
+    <main class="main">
+      <header class="topbar"><button id="openNav" class="icon-button mobile-only" aria-label="Open menu">☰</button><div class="breadcrumb">My Bible　›　<strong id="pageLabel">Explore Scripture</strong></div><span class="personal-label">● Personal reading space</span></header>
+      <div class="content">
+        <section id="readView">
+          <div class="welcome"><div><span class="eyebrow green">YOUR DAILY REFLECTION</span><h1>Find wisdom in the Word.</h1><p>Search a passage or discover verses by keyword.</p></div><div class="welcome-icon">▤</div></div>
+          <section class="search-panel">
+            <div class="search-tabs"><button id="referenceTab" class="selected" type="button">▤ Verse reference</button><button id="keywordTab" type="button">⌕ Keyword search</button></div>
+            <form id="searchForm" class="search-form"><div class="search-input"><span>⌕</span><input id="searchQuery" required placeholder="Try John 3:16 or Psalm 23"><button id="clearSearch" type="button" aria-label="Clear search">×</button></div><button id="searchButton" class="btn primary" type="submit">⌕ Search</button></form>
+            <div class="suggestions">Try: <button type="button" data-ref="John 3:16">John 3:16</button><button type="button" data-ref="Psalm 23">Psalm 23</button><button type="button" data-ref="Romans 8:28">Romans 8:28</button></div>
+          </section>
+          <div id="resultMessage"></div>
+          <section id="passageCard" class="passage-card hidden">
+            <div class="passage-header"><div><span class="eyebrow green">SCRIPTURE RESULT</span><h2 id="passageReference"></h2><p id="passageTranslation" class="muted"></p></div><button id="saveCurrent" class="save-button">♡ Save verse</button></div>
+            <div class="language-row"><span>文 Display language</span><div class="language-switch"><button id="englishButton" class="active" type="button">English</button><button id="tagalogButton" type="button">Tagalog</button></div></div>
+            <div id="translationNotice" class="translation-notice hidden"></div>
+            <div id="passageText" class="passage-text"></div>
+            <div id="verseList" class="verse-list"></div>
+            <div class="passage-footer"><span>▤ Scripture for reflection</span><button id="copyPassage" class="text-link" type="button">▣ Copy passage</button></div>
+          </section>
+          <section id="keywordResults" class="keyword-results hidden"><div class="section-heading"><div><span class="eyebrow green">SEARCH RESULTS</span><h2 id="keywordTitle"></h2></div></div><div id="keywordList" class="result-list"></div></section>
+          <section id="starterGrid" class="starter-grid">
+            <article class="starter-card"><div class="starter-icon">☼</div><span class="eyebrow green">A PLACE TO BEGIN</span><h3>Start with a familiar passage</h3><p>Enter a verse reference to read Scripture or use keyword search to find a topic.</p><button id="startPsalm" class="text-link" type="button">Read Psalm 23　›</button></article>
+            <article class="starter-card soft"><div class="starter-icon">♡</div><span class="eyebrow green">MAKE IT PERSONAL</span><h3>Keep verses close</h3><p>Save passages that encourage you. They will be available whenever you return.</p><button id="goFavorites" class="text-link" type="button">View saved verses　›</button></article>
+          </section>
+          <p class="api-note">● Bible passage text comes from bible-api.com. Internet access is required.</p>
+        </section>
+        <section id="libraryView" class="hidden"><span class="eyebrow green">YOUR PERSONAL COLLECTION</span><h1 id="libraryTitle">Your saved verses</h1><p id="libraryDesc" class="muted"></p><div id="libraryList"></div></section>
+        <footer class="footer">Made for reading, reflection, and learning · Salita ng Buhay</footer>
+      </div>
+    </main>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>
